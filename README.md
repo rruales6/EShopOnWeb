@@ -1,5 +1,14 @@
 [![Build Status](https://github.com/dotnet-architecture/eShopOnWeb/workflows/eShopOnWeb%20Build%20and%20Test/badge.svg)](https://github.com/dotnet-architecture/eShopOnWeb/actions)
 
+# Commands necesary for Github Actions CI/CD
+az ad sp create-for-rbac --name GH-Action-eshoponweb --role contributor --scopes /subscriptions/<suscID>/resourceGroups/rg-az400-eshoponweb-rruales --sdk-auth
+
+az group list --query "[?starts_with(name,'rg-az400-eshoponweb')].name" --output tsv
+rg-az400-eshoponweb-rruales
+
+az group list --query "[?starts_with(name,'rg-az400-eshoponweb')].[name]" --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
+
+
 # Microsoft eShopOnWeb ASP.NET Core Reference Application
 
 Sample ASP.NET Core reference application, powered by Microsoft, demonstrating a single-process (monolithic) application architecture and deployment model. If you're new to .NET development, read the [Getting Started for Beginners](https://github.com/dotnet-architecture/eShopOnWeb/wiki/Getting-Started-for-Beginners) guide.
